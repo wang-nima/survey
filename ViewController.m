@@ -10,6 +10,9 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *SubmitButton;
+@property (weak, nonatomic) IBOutlet UITextField *Amount;
+@property (weak, nonatomic) IBOutlet UISlider *Preference;
 @end
 
 @implementation ViewController
@@ -22,6 +25,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)SubmitButtonPressed:(id)sender {
+    //NSLog(@"Button Pressed");
+    NSString *s = self.Amount.text;
+    float pref = self.Preference.value;
+    NSLog(@"%@", s);
+    NSLog(@"%f", pref);
 }
 
 @end
