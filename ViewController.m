@@ -37,9 +37,10 @@
     // send http post request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://halogen-goods-93306.appspot.com/sign?content=%@&pref=%@", s, [[NSNumber numberWithFloat:pref] stringValue]]];
+    NSString *prefString = [[NSNumber numberWithFloat:pref] stringValue];
+    NSLog(@"prefString is %@", prefString);
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://halogen-goods-93306.appspot.com/sign?content=%@&pref=%@", s, prefString]];
     [request setURL:url];
-    //[request setValue:s forKey:@"content"];
     
     // check error
     NSError *error = [[NSError alloc] init];
@@ -48,10 +49,24 @@
     
     if([responseCode statusCode] != 200){
         NSLog(@"Error getting %@, HTTP status code %li", url, (long)[responseCode statusCode]);
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"alert"
+                                    message:@"Connection failed"
+                                   delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:@"OK", nil];
+        [alert show];
         
     } else {
         // success
         NSLog(@"success");
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"alert"
+                                    message:@"submitted"
+                                   delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:@"OK", nil];
+        [alert show];
     }
 }
 
